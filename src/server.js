@@ -8,7 +8,7 @@ const crud = require('./crud')
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/products', (req, res) => {
-    res.send(crud.readProducts)
+    res.send(crud.readProducts())
 })
 
 app.get('/products/:id', (req, res) => {
