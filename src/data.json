@@ -1,0 +1,12 @@
+{
+    "1" : {
+        "name": "Laptop",
+        "price": 2599,
+        "id": 1
+    },
+    "2" : {
+        "name": "Knife",
+        "price": 99,
+        "id": 2
+    }
+}
