@@ -1,12 +1,1 @@
-{
-    "1" : {
-        "name": "Laptop",
-        "price": 2599,
-        "id": 1
-    },
-    "2" : {
-        "name": "Knife",
-        "price": 99,
-        "id": 2
-    }
-}
+{"1":{"name":"Sword","price":"12000","id":1},"2":{"name":"Sword","price":"12000","id":2}}

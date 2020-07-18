@@ -13,17 +13,18 @@ function readJson(path) {
     }
 }
 
-function editJson(path, callback) {
-    const obj = readJson(path)
-    //const newObj = callback(obj)
-    //fs.writeFile(path, newObj)
+function editJson(path, product) {
+    const products = readJson(path)
+    products[product.id] = product
+    fs.writeFile('./src/data.json', JSON.stringify(products), err => {})
 }
 
 function createProduct(product) {
     if (!product.id) product.id = sequence.id
-    products[product.id] = product
+    editJson('./src/data.json', product)
     return product
-}/////////////////////////////////////////
+    // o sequence.id não está funcionando
+}
 
 function readProducts() {
     return Object.values(readJson('./src/data.json'))
@@ -34,12 +35,14 @@ function productById(id) {
 }
 
 function updateProduct(product) {
-    products[product.id] = product
+    editJson('./src/data.json', product)
     return product
-}//////////////////////////////////////
+}
 
 function deleteProduct(id) {
+    const products = readJson('./src/data.json')
     delete products[id]
-}///////////////////////////////////////////
+    fs.writeFile('./src/data.json', JSON.stringify(products), err => {})
+}
 
 module.exports = { createProduct, readProducts, productById, updateProduct, deleteProduct }
