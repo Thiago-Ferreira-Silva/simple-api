@@ -5,48 +5,41 @@ const sequence = {
     get id() { return this._id++ }
 }
 
-function readJson(path, callback) {
-    fs.readFile(path, 'utf8', (err, data) => {
-        if (err) console.log(err)
-        const object = JSON.parse(data)
-        return callback(null, object)
-    })
+function readJson(path) {
+    try {
+        return JSON.parse(fs.readFileSync(path, 'utf8'))
+    }catch(err) {
+        throw err
+    }
 }
 
-const abb = readJson('./src/data.json', (err, data) => {
-    if (err) {
-        console.log(err)
-        return
-    }
-    console.log(data)
-    return data
-})
-
-console.log('fff', abb)
-
-//const products = {}
+function editJson(path, callback) {
+    const obj = readJson(path)
+    //const newObj = callback(obj)
+    //fs.writeFile(path, newObj)
+}
 
 function createProduct(product) {
     if (!product.id) product.id = sequence.id
     products[product.id] = product
     return product
-}
+}/////////////////////////////////////////
 
 function readProducts() {
-    return Object.values(products)
+    return Object.values(readJson('./src/data.json'))
 }
 
 function productById(id) {
-    return products[id] || {}
+    return readJson('./src/data.json')[id] || {}
 }
 
 function updateProduct(product) {
     products[product.id] = product
     return product
-}
+}//////////////////////////////////////
 
 function deleteProduct(id) {
     delete products[id]
-}
+}///////////////////////////////////////////
 
 module.exports = { createProduct, readProducts, productById, updateProduct, deleteProduct }
