@@ -7,9 +7,6 @@ function getId() {
     return id
 }
 
-const aa = getId()
-console.log(aa)
-
 function readJson(path) {
     try {
         return JSON.parse(fs.readFileSync(path, 'utf8'))
