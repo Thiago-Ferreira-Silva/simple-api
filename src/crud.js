@@ -1,9 +1,14 @@
 const fs = require('fs')
 
-const sequence = {
-    _id: 1,
-    get id() { return this._id++ }
+function getId() {
+    products = Object.keys(JSON.parse(fs.readFileSync('./src/data.json', 'utf8')))
+    products.sort((a, b) => a-b)
+    const id = parseInt(products[products.length -1 ]) + 1
+    return id
 }
+
+const aa = getId()
+console.log(aa)
 
 function readJson(path) {
     try {
@@ -20,10 +25,9 @@ function editJson(path, product) {
 }
 
 function createProduct(product) {
-    if (!product.id) product.id = sequence.id
+    if (!product.id) product.id = getId()
     editJson('./src/data.json', product)
     return product
-    // o sequence.id não está funcionando
 }
 
 function readProducts() {
